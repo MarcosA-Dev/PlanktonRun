@@ -1,0 +1,113 @@
+:root {
+    --plankton-size: 15vh; 
+    --line-thickness: 3px;
+    --game-center-y: 50%; 
+}
+
+body {
+    background-color: #101010; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    font-family: monospace;
+    color: white;
+    touch-action: manipulation; 
+}
+
+#game-container {
+    width: 100vw; 
+    height: 100vh; 
+    position: relative;
+    background-color: #050505; 
+    overflow: hidden; 
+}
+
+/* O "Chão" (Linha de Circuito Verde) */
+#ground {
+    position: absolute;
+    top: var(--game-center-y); 
+    transform: translateY(-50%); 
+    width: 100%;
+    height: var(--line-thickness); 
+    background-color: #0f0; 
+    box-shadow: 0 0 10px #0f0; 
+    z-index: 1; 
+}
+
+/* O Plankton */
+#plankton {
+    position: absolute;
+    left: 4%; 
+    width: var(--plankton-size);
+    height: var(--plankton-size);
+    background-image: url('assets/plankton.png'); 
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center bottom; 
+    border-radius: 0; 
+    z-index: 10;
+}
+
+/* === ESTILOS DA ONDA PULSANTE (Contêiner de Colisão - Cresce para CIMA) === */
+.obstacle {
+    position: absolute;
+    display: flex; 
+    align-items: flex-end; /* As barras crescem da linha para cima */
+    z-index: 5;
+    background-color: transparent; 
+}
+
+/* === NOVO ESTILO: Contêiner de Decoração (NÃO CAUSA COLISÃO - Cresce para BAIXO) === */
+.obstacle-decoration {
+    position: absolute;
+    display: flex; 
+    align-items: flex-start; /* As barras crescem da linha para baixo */
+    z-index: 5; /* Z-index baixo para não interferir visualmente */
+    background-color: transparent; 
+}
+
+/* Cada "pico" ou "barra" */
+.wave-segment {
+    width: 3px; 
+    margin-left: 1px; 
+    background-color: #0f0; 
+    box-shadow: 0 0 5px #0f0; 
+}
+
+/* Placar e Game Over permanecem os mesmos */
+#score {
+    position: absolute;
+    top: 5vh; 
+    right: 5vw;
+    font-size: 3em;
+    color: #0f0;
+    z-index: 20;
+}
+
+/* Game Over */
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* AJUSTE 1: Use vh ou vw para o tamanho da fonte */
+    font-size: 2vw; /* Exemplo: 8% da largura da tela */
+    line-height: 1.2; /* Espaçamento entre as linhas */
+    
+    text-align: center; /* Centraliza o texto */
+    white-space: normal; /* Permite que o texto quebre, se necessário */
+    
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #f00;
+    text-shadow: 0 0 10px #f00;
+    display: none; 
+    cursor: pointer; 
+    z-index: 30;
+}
